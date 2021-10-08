@@ -36,4 +36,10 @@ public class UsuariosController {
 		UsuariosDAO usudao = new UsuariosDAO();
 		return usudao.actualizarUsuario(usr);
 	}
+	
+	@PostMapping("/usuario/consultarUsuario")
+	public Usuarios consultarUsuario(@RequestBody Usuarios usr) {
+		UsuariosDAO usudao = new UsuariosDAO();
+		return usudao.consultarUsuario(usr);
+	}
 }

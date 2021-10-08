@@ -135,7 +135,7 @@ public class UsuariosDAO {
 
    }
 	 
-   public boolean consultarUsuario(Usuarios usuario) {
+   public Usuarios consultarUsuario(Usuarios usuario) {
    PreparedStatement ps = null;
    ResultSet rs = null;
    String sql = "SELECT * FROM usuarios WHERE cedula_usuario=?";
@@ -148,18 +148,18 @@ public class UsuariosDAO {
            usuario.setCorreo(rs.getString("email_usuario"));
            usuario.setUsuario(rs.getString("usuario"));
            usuario.setContrasena(rs.getString("password_2"));
-           return true;
 
        }
 
-       return false;
+       
    } catch (SQLException e) {
        System.err.println(e);
-       return false;
+       
    } finally {
        con.close();
 
    }
+return usuario;
 
 }
    
