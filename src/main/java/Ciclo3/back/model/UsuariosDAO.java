@@ -138,16 +138,19 @@ public class UsuariosDAO {
    public Usuarios consultarUsuario(Usuarios usuario) {
    PreparedStatement ps = null;
    ResultSet rs = null;
+   Usuarios usuarioEnc= null;
    String sql = "SELECT * FROM usuarios WHERE cedula_usuario=?";
    try {
        ps = con.getConnection().prepareStatement(sql);
        ps.setLong(1, usuario.getCedula());
        rs = ps.executeQuery();
        while (rs.next()) {
-           usuario.setNombre(rs.getString("nombre_usuario"));
-           usuario.setCorreo(rs.getString("email_usuario"));
-           usuario.setUsuario(rs.getString("usuario"));
-           usuario.setContrasena(rs.getString("password_2"));
+    	   	Long cedula = rs.getLong("cedula_usuario");
+			String nombre =  rs.getString("nombre_usuario");
+			String correo =  rs.getString("email_usuario");
+			String usr = rs.getString("usuario");
+			String contrasena = rs.getString("password_2");
+			usuarioEnc =  new Usuarios(cedula, nombre, correo, usr, contrasena );
 
        }
 
@@ -159,7 +162,7 @@ public class UsuariosDAO {
        con.close();
 
    }
-return usuario;
+return usuarioEnc;
 
 }
    
