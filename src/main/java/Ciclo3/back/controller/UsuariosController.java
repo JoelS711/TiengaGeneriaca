@@ -42,4 +42,9 @@ public class UsuariosController {
 		UsuariosDAO usudao = new UsuariosDAO();
 		return usudao.consultarUsuario(usr);
 	}
+	@PostMapping("/usuario/eliminarUsuario")
+	public Usuarios eliminarUsuario(@RequestBody Usuarios usr) {
+		UsuariosDAO usudao = new UsuariosDAO();
+		return usudao.borrarUsuario(usr);
+	}
 }

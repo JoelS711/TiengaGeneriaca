@@ -210,5 +210,22 @@ return usuarioEnc;
 		  }
 		  return misUsuarios;
 		 }
-   
+	public Usuarios borrarUsuario(Usuarios usuario) {
+		   PreparedStatement ps = null;
+		   String sql = "DELETE FROM usuarios WHERE cedula_usuario=?";
+		   try {
+		       ps = con.getConnection().prepareStatement(sql);
+		       ps.setLong(1, usuario.getCedula());
+		       ps.execute();
+
+		       
+		   } catch (SQLException e) {
+		       System.err.println(e);
+		       
+		   } finally {
+		       con.close();
+		   }
+		  return usuario;
+
+		  }
 }
