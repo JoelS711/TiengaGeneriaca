@@ -15,5 +15,10 @@ public class ClientesController {
 		ClientesDAO clidao = new ClientesDAO();
 		return clidao.actualizarCliente(cli);
 	}
+	@PostMapping("/cliente/eliminarCliente")
+	public Clientes eliminarCliente(@RequestBody Clientes cli) {
+		ClientesDAO clidao = new ClientesDAO();
+		return clidao.borrarCliente(cli);
+	}
 
 }

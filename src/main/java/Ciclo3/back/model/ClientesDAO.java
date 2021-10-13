@@ -29,4 +29,21 @@ public class ClientesDAO {
 		
 
 	   }
+	public Clientes borrarCliente(Clientes cli) {
+		PreparedStatement ps = null;
+		String sql = "DELETE FROM clientes WHERE cedula_cliente=?";
+		try {
+			ps = con.getConnection().prepareStatement(sql);
+			ps.setLong(1,cli.getCedula());
+			ps.execute();
+
+		} catch (SQLException e) {
+			System.err.println(e);
+
+		} finally {
+			con.close();
+		}
+		return cli;
+
+	}
 }
