@@ -20,5 +20,10 @@ public class ClientesController {
 		ClientesDAO clidao = new ClientesDAO();
 		return clidao.borrarCliente(cli);
 	}
+	@PostMapping("/cliente/consultarCliente")
+	public Clientes consultarCiente(@RequestBody Clientes cli) {
+		ClientesDAO clidao = new ClientesDAO();
+		return clidao.consultarCliente(cli);
+	}
 
 }

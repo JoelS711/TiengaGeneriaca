@@ -46,4 +46,33 @@ public class ClientesDAO {
 		return cli;
 
 	}
+	public Clientes consultarCliente(Clientes cliente) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Clientes clienteEnc = null;
+		String sql = "SELECT * FROM clientes WHERE cedula_cliente=?";
+		try {
+			ps = con.getConnection().prepareStatement(sql);
+			ps.setLong(1, cliente.getCedula());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Long cedula = rs.getLong("cedula_cliente");
+				String direccion = rs.getString("direccion_cliente");
+				String correo = rs.getString("email_cliente");
+				String nombre = rs.getString("nombre_cliente");
+				String telefono = rs.getString("telefono_cliente");
+				clienteEnc = new Clientes(cedula, direccion, correo, nombre, telefono);
+
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e);
+
+		} finally {
+			con.close();
+
+		}
+		return clienteEnc;
+
+	}
 }
