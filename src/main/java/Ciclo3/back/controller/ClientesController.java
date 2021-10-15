@@ -34,5 +34,11 @@ public class ClientesController {
 		ClientesDAO objDAO=new ClientesDAO(); 
 			return objDAO.listaClientes();
 	}
+	
+	@PostMapping("/cliente/crearCliente")
+	public Clientes crearCliente(@RequestBody Clientes cli) {
+		ClientesDAO clidao = new ClientesDAO();
+		return clidao.crearCliente(cli);
+	}
 
 }

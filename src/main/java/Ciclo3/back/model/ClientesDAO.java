@@ -106,4 +106,28 @@ public class ClientesDAO {
 		  }
 		  return misClientes;
 		 }
+	
+	public Clientes crearCliente(Clientes cliente) {
+	       PreparedStatement ps = null;
+	       String sql = "INSERT INTO clientes (cedula_cliente, direccion_cliente, email_cliente, nombre_cliente, telefono_cliente) VALUES(?,?,?,?,?)";
+	       try {
+	           ps = con.getConnection().prepareStatement(sql);
+	           ps.setLong(1, cliente.getCedula());
+	           ps.setString(2, cliente.getDireccion());
+	           ps.setString(3, cliente.getCorreo());
+	           ps.setString(4, cliente.getNombre());
+	           ps.setString(5, cliente.getTelefono());
+	           ps.execute();
+
+	       } catch (SQLException e) {
+	           System.err.println(e);
+
+	       } finally {
+	           con.close();
+	       }
+		return cliente;
+
+
+	   }
+	
 }
