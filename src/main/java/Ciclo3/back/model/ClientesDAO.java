@@ -3,6 +3,9 @@ package Ciclo3.back.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class ClientesDAO {
 
@@ -76,4 +79,31 @@ public class ClientesDAO {
 		return clienteEnc;
 
 	}
+	
+	public ArrayList<Clientes> listaClientes() {
+		  ArrayList<Clientes> misClientes = new ArrayList<Clientes>();
+		  Conexion conex= new Conexion();
+		    
+		  try {
+		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM clientes");
+		   ResultSet res = consulta.executeQuery();
+		   while(res.next()){
+		    
+		    Long cedula = Long.parseLong(res.getString("cedula_cliente"));
+		    String nombre = res.getString("nombre_cliente");
+		    String direccion = res.getString("direccion_cliente");
+		    String telefono = res.getString("telefono_cliente");
+		    String correo = res.getString("email_cliente");
+		    Clientes persona= new Clientes(cedula, nombre, correo, direccion, telefono);
+		    misClientes.add(persona);
+		          }
+		          res.close();
+		          consulta.close();
+		          con.close();
+		   
+		  } catch (Exception e) {
+		   JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+		  }
+		  return misClientes;
+		 }
 }

@@ -1,7 +1,10 @@
 package Ciclo3.back.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ciclo3.back.model.Clientes;
@@ -24,6 +27,12 @@ public class ClientesController {
 	public Clientes consultarCliente(@RequestBody Clientes cli) {
 		ClientesDAO clidao = new ClientesDAO();
 		return clidao.consultarCliente(cli);
+	}
+	
+	@RequestMapping("/listarClientes")
+	public ArrayList<Clientes> listaClientes() {
+		ClientesDAO objDAO=new ClientesDAO(); 
+			return objDAO.listaClientes();
 	}
 
 }
