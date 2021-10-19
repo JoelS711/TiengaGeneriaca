@@ -85,11 +85,14 @@ public class VentasDAO {
 		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT clientes_cedula_cliente as 'ClienteID', SUM(total_venta) as Total FROM ventas GROUP BY clientes_cedula_cliente");
 		   ResultSet res = consulta.executeQuery();
 		   while(res.next()){
-		    
-			   Long cedula = Long.parseLong(res.getString("clientes_cedula_cliente"));
+			   Long codigo = Long.parseLong(res.getString("codigo_venta"));
+			   Long cedula_usu = Long.parseLong(res.getString("usuarios_cedula_usuario"));
+			   Long cedula_cli = Long.parseLong(res.getString("clientes_cedula_cliente"));
+			   Long iva = Long.parseLong(res.getString("ivaventa"));
 			   Long totalventas = Long.parseLong(res.getString("total_venta"));
-		    Ventas persona= new Ventas(cedula, totalventas);
-		    misVentas.add(persona);
+			   Long valorventa = Long.parseLong(res.getString("valor_venta"));
+		    Ventas ventas= new Ventas(codigo, cedula_usu, cedula_cli, iva, totalventas, valorventa );
+		    misVentas.add(ventas);
 		          }
 		          res.close();
 		          consulta.close();

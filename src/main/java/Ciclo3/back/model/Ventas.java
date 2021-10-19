@@ -17,9 +17,7 @@ public class Ventas {
 		this.total_venta = total_venta;
 		this.valor_venta = valor_venta;
 	}
-	public Ventas(Long cedula_cliente, Long total_venta) {
-		// TODO Auto-generated constructor stub
-	}
+
 	@Override
 	public String toString() {
 		return "Ventas [cedula_usuario=" + cedula_usuario + ", cedula_cliente=" + cedula_cliente + ", codigo=" + codigo
