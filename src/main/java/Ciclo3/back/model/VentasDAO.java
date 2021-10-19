@@ -3,6 +3,9 @@ package Ciclo3.back.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class VentasDAO {
 
@@ -73,6 +76,30 @@ public class VentasDAO {
 		return venta;
 
 	}
+	
+	public ArrayList<Ventas> listarVentas() {
+		  ArrayList<Ventas> misVentas = new ArrayList<Ventas>();
+		  Conexion conex= new Conexion();
+		    
+		  try {
+		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT clientes_cedula_cliente as 'ClienteID', SUM(total_venta) as Total FROM ventas GROUP BY clientes_cedula_cliente");
+		   ResultSet res = consulta.executeQuery();
+		   while(res.next()){
+		    
+			   Long cedula = Long.parseLong(res.getString("clientes_cedula_cliente"));
+			   Long totalventas = Long.parseLong(res.getString("total_venta"));
+		    Ventas persona= new Ventas(cedula, totalventas);
+		    misVentas.add(persona);
+		          }
+		          res.close();
+		          consulta.close();
+		          con.close();
+		   
+		  } catch (Exception e) {
+		   JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+		  }
+		  return misVentas;
+		 }
 	
 
 }
