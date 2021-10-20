@@ -7,6 +7,13 @@ public class Ventas {
 	Long iva;
 	Long total_venta;
 	Long valor_venta;
+	
+	
+	
+	public Ventas() {
+		super();
+	}
+
 	public Ventas(Long cedula_usuario, Long cedula_cliente, Long codigo, Long iva, Long total_venta,
 			Long valor_venta) {
 		super();

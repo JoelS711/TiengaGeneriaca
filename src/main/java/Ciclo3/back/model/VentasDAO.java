@@ -77,31 +77,30 @@ public class VentasDAO {
 
 	}
 	
-	public ArrayList<Ventas> listarVentas() {
-		  ArrayList<Ventas> misVentas = new ArrayList<Ventas>();
+	public ArrayList<Reportes> listarVentas() {
+		  ArrayList<Reportes> misReportes = new ArrayList<Reportes>();
 		  Conexion conex= new Conexion();
-		    
-		  try {
-		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT clientes_cedula_cliente as 'ClienteID', SUM(total_venta) as Total FROM ventas GROUP BY clientes_cedula_cliente");
+		  
+
+		try {
+		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT c.cedula_cliente, c.nombre_cliente, SUM(v.total_venta) FROM clientes c INNER JOIN ventas v ON c.cedula_cliente = v.clientes_cedula_cliente GROUP BY v.clientes_cedula_cliente");
 		   ResultSet res = consulta.executeQuery();
 		   while(res.next()){
-			   Long codigo = Long.parseLong(res.getString("codigo_venta"));
-			   Long cedula_usu = Long.parseLong(res.getString("usuarios_cedula_usuario"));
-			   Long cedula_cli = Long.parseLong(res.getString("clientes_cedula_cliente"));
-			   Long iva = Long.parseLong(res.getString("ivaventa"));
-			   Long totalventas = Long.parseLong(res.getString("total_venta"));
-			   Long valorventa = Long.parseLong(res.getString("valor_venta"));
-		    Ventas ventas= new Ventas(codigo, cedula_usu, cedula_cli, iva, totalventas, valorventa );
-		    misVentas.add(ventas);
+			   Long cedula_cli = Long.parseLong(res.getString("cedula_cliente"));
+			   String nombre = res.getString("nombre_cliente");
+			   Float totalventas = Float.parseFloat(res.getString("SUM(v.total_venta)"));
+			   Reportes report = new Reportes(cedula_cli, nombre, totalventas);
+		    misReportes.add(report);
 		          }
 		          res.close();
 		          consulta.close();
 		          con.close();
 		   
 		  } catch (Exception e) {
-		   JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+			  System.out.print(e);
 		  }
-		  return misVentas;
+		return misReportes;
+		
 		 }
 	
 

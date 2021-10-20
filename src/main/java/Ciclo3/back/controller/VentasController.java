@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Ciclo3.back.model.Clientes;
 import Ciclo3.back.model.ClientesDAO;
+import Ciclo3.back.model.Reportes;
 import Ciclo3.back.model.Ventas;
 import Ciclo3.back.model.VentasDAO;
 
@@ -22,7 +23,7 @@ public class VentasController {
 	}
 	
 	@RequestMapping("/reportes/listarVentas")
-	public ArrayList<Ventas> listarVentas() {
+	public ArrayList<Reportes> listarVentas() {
 		VentasDAO objDAO=new VentasDAO(); 
 			return objDAO.listarVentas();
 	}
