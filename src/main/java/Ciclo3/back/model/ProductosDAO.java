@@ -65,4 +65,35 @@ public class ProductosDAO {
 		}
 		return p;
 	}
+	public Productos consultarProducto(Productos prod) {
+		Conexion conex = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Productos ProdEnc = null;
+		String sql = "SELECT * FROM productos WHERE codigo_producto=?";
+		try {
+			ps = conex.getConnection().prepareStatement(sql);
+			ps.setLong(1, prod.getCodigo());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Integer codigo = rs.getInt("codigo_producto");
+				Long proveedor = rs.getLong("proveedores_nitproveedores");
+				Float iva = rs.getFloat("ivacompra");
+				String nombre = rs.getString("nombre_produto"); //nombre de la columna se encuentra asi en la base de datos
+				Float pcompra = rs.getFloat("precio_compra");
+				Float pventa = rs.getFloat("precio_venta");
+				ProdEnc = new Productos (codigo, proveedor, iva, nombre, pcompra,pventa);
+
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e);
+
+		} finally {
+			conex.close();
+
+		}
+		return ProdEnc;
+
+	}
 }

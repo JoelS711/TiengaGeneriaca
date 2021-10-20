@@ -31,4 +31,10 @@ public class ProductosController {
 		ProductosDAO dao =  new ProductosDAO();
 		return dao.registrarProducto(p);	
 	}
+	@PostMapping("/producto/consultarProducto")
+	public Productos consultarProducto(@RequestBody Productos p) {
+		ProductosDAO proddao = new ProductosDAO();
+		return proddao.consultarProducto(p);
+	}
+	
 }
