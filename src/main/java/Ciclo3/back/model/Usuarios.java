@@ -1,14 +1,23 @@
 package Ciclo3.back.model;
 
-public class Usuarios {
+
+
+public class Usuarios{
 	Long cedula;
     String nombre;
     String correo;
     String usuario;
     String contrasena;
+    
+    
+    
+	public Usuarios() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-   
-	
+
+
 	public Usuarios(Long cedula, String nombre, String correo, String usuario, String contrasena) {
 		super();
 		this.cedula = cedula;
@@ -82,8 +91,11 @@ public class Usuarios {
 
 	@Override
 	public String toString() {
-		return "Usuarios [cedula=" + cedula + ", nombre=" + nombre + ", correo=" + correo + ", usuario=" + usuario + ", contraseña=" + contrasena
-				+ "]";
+		return "Usuarios [cedula=" + cedula + ", nombre=" + nombre + ", correo=" + correo + ", usuario=" + usuario
+				+ ", contrasena=" + contrasena + "]";
 	}
+    
 	
+    
 }
+
